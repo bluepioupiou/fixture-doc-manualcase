@@ -29,34 +29,12 @@ class AppFixtures extends Fixture
     {
         $doc = $this->documentationManager->getDocumentation();
         
-        $product = (new Product())
-            ->setName("Product 1")
-            ->setCategory("Category 1");
-
-        $manager->persist($product);
-        
-        $doc->addFixture('Products', [
-            'id' => 1,
-            'name' => 'Product 1',
-        ]);
-
-        $product = (new Product())
-            ->setName("Product 2")
-            ->setCategory("Category 2");
-
-        $manager->persist($product);
-        
-        $doc->addFixture('Products', [
-            'id' => 2,
-            'name' => 'Product 2',
-        ]);
-
         $customer = (new Customer())
             ->setFirstname('John')
             ->setLastname('Doe')
             ->setEmail('john.doe@test.fr');
 
-        $doc->addFixture('Customers', [
+        $fixtureCustomer = $doc->addFixture('Customers', [
             'id' => 1,
             'first name' => 'John',
             'last name' => 'Doe',
@@ -65,5 +43,34 @@ class AppFixtures extends Fixture
 
         $manager->persist($customer);
         $manager->flush();
+        
+        $product = (new Product())
+            ->setName("Product 1")
+            ->setCategory("Category 1");
+
+        $manager->persist($product);
+        
+        $productFixture = $doc->addFixture('Products', [
+            'id' => 1,
+            'name' => 'Product 1',
+            'owner' => 'John Doe'
+        ]);
+        $productFixture->addLink('owner', $fixtureCustomer);
+
+        $product = (new Product())
+            ->setName("Product 2")
+            ->setCategory("Category 2");
+
+        $manager->persist($product);
+        
+        $productFixture = $doc->addFixture('Products', [
+            'id' => 2,
+            'name' => 'Product 2',
+            'owner' => 'John Doe'
+        ]);
+
+        $productFixture->addLink('owner', $fixtureCustomer);
+
+        
     }
 }

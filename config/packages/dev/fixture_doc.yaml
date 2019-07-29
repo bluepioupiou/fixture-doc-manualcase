@@ -1,2 +1,4 @@
 adlarge_fixtures_documentation:
-  title: Mon titre de ouf
+  title: My manual example title
+  reloadCommands:
+    - php bin/console doctrine:fixtures:load

@@ -29,6 +29,6 @@ If you change the structure of the models you'll have to run 'make init' command
 
 # Statistics
 
-The use of the bundle add around 60% of time to load fixtures. For this project it takes approx. from 2.7s to 4.6s in average on 10 launch,
+The use of the bundle add around 200% of time to load fixtures. For this project it takes approx. from 0.35s to 1.38s in average on 10 launch,
 for a case with 100 customers and 1000 products.
 In the future we'll have to improve these delays, but a fixture project don't have to be too big either

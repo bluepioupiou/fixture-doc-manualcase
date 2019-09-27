@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Entity;
 
@@ -25,6 +25,16 @@ class Product
      * @ORM\Column(type="string", length=255)
      */
     private $category;
+
+    /**
+     * @ORM\Column(name="tags", type="array", nullable=true)
+     */
+    private $tags;
+
+    /* @ManyToOne(targetEntity="Customer")
+     * @JoinColumn(name="owner_id", referencedColumnName="id")
+     */
+    private $owner;
 
     public function setName(string $name): self
     {
@@ -59,4 +69,25 @@ class Product
         return $this->getCategory;
     }
 
+    public function getOwner(): Customer
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(Customer $owner): self
+    {
+        $this->owner = $owner;
+        return $this;
+    }
+
+    public function setTags(?array $tags): self
+    {
+        $this->tags = $tags;
+        return $this;
+    }
+
+    public function getTags(): ?array
+    {
+        return $this->tags;
+    }
 }
